@@ -2,7 +2,7 @@
 hands = []
 for line in open('data.txt', 'r').readlines():
     hand = line.split(' ')
-    hands.append((hand[0], int(hand[1].rstrip('\n'))))
+    hands.append((hand[0].replace('A', 'a').replace('K', 'b').replace('Q', 'c').replace('J', 'd').replace('T', 'e').replace('9', 'f').replace('8', 'g').replace('7', 'h').replace('6', 'i').replace('5', 'j').replace('4', 'k').replace('3', 'l').replace('2', 'm'), int(hand[1].rstrip('\n'))))
 
 sortedHands = [[], [], [], [], [], [], []]
 
@@ -36,7 +36,11 @@ for hand in hands:
             break
     else:
         sortedHands[6].append(hand)
-    
-print(sortedHands)
 
-# TODO: SORT THEM BY SINGULAR CARDS
+result = 0
+i = 1
+for handList in sortedHands:
+    for hand in sorted(handList):
+        result += hand[1] * i
+        i += 1
+print(result)
